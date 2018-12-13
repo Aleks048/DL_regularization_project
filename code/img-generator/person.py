@@ -7,9 +7,9 @@ class Person(Simple_Object):
         self.name = "person"
         self.rotation = rot
         self.scale = sc
-        self.arm = arm
-        self.Lleg = Lleg
-        self.Rleg = Rleg
+        self.arm = 135* arm
+        self.Lleg = 90 * Lleg
+        self.Rleg = -90  * Rleg
         self.shape = self.shape()
 
     def shape(self):

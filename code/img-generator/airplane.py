@@ -7,9 +7,9 @@ class Airplane(Simple_Object):
         self.name = "airplane"
         self.rotation = rot
         self.scale = sc
-        self.head = head
-        self.body = body
-        self.wing = wing
+        self.head = 5 * head
+        self.body = 10 * body
+        self.wing = 15 * wing
         self.shape = self.shape()
 
     def shape(self):

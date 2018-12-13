@@ -5,18 +5,19 @@ from airplane import Airplane
 from person import Person
 from frog import Frog
 
-def generate_dataset(datapath = "/home/joel/datasets/csi5138-img/dataset1"): # do not add trailing /
-
-
-    sigma = 0.01 # variance for generation
-    mu = 0 # mean for generation
-
-    N = 20 # number of images to generate
-
-    #p = np.full((5), 0.2) # probability of drawing each class
+def generate_dataset(N = 100,
+    sigma = 0.1, mu = 0,
+    balanced_sample = True, # equal number of each class
+    p = [1./5]*5, # for multinomial distribution of classes
+    datapath = "/home/joel/datasets/csi5138-img/dataset1"): # do not add trailing /
 
     for i in range(N):
-        c = np.random.randint(5)
+        if balanced_sample:
+            c = i % 5
+        else:
+            c = np.random.multinomial(1, p) # choose class from distribution p
+            c = np.argmax(c)
+        # construct vector of N(mu, sigma**2)
         var = sigma * np.random.randn(5) + mu
         # no switch statement in Python?
         if c == 0:

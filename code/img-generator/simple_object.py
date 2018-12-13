@@ -13,13 +13,13 @@ class Simple_Object:
         self.inv_scale = 1./ self.pixels
         self.size = (self.pixels, self.pixels)
         self.rotation = 0
-        self.scale = 0.9
+        self.scale = 0
 
     def draw(self):
         surface = cairo.ImageSurface(cairo.FORMAT_RGB24, *self.size)
         ctx = cairo.Context(surface)
         ctx.scale(*self.size)
-        t=Transform(children = self.shape, rotation = self.rotation,
+        t=Transform(children = self.shape, rotation = 15 * self.rotation,
             scale = [1+self.scale, 1+self.scale])
         t.draw(ctx)
     #     display(surface_to_image(surface))
