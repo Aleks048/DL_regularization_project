@@ -1,3 +1,5 @@
 .ipynb_checkpoints
 debug.log
 *.pyc
+__pycache__
+*.png
