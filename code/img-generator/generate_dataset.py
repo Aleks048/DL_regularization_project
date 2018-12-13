@@ -19,7 +19,7 @@ def generate_dataset(N = 100,
             c = np.argmax(c)
         # construct vector of N(mu, sigma**2)
         var = sigma * np.random.randn(5) + mu
-        # no switch statement in Python?
+        # no switch statement in Python?#yes noswitch statement in python
         if c == 0:
             obj = Dog(*var)
         elif c == 1:
