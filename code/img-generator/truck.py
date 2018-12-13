@@ -9,7 +9,7 @@ class Truck(Simple_Object):
         self.scale = sc
         self.head = head
         self.body = body
-        self.wheel = wheel
+        self.wheel = 0.3 * wheel
         self.shape = self.shape()
 
     def shape(self):

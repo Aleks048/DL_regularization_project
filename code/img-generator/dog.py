@@ -7,9 +7,9 @@ class Dog(Simple_Object):
         self.name = "dog"
         self.rotation = rot
         self.scale = sc
-        self.tail = tail
-        self.leg1 = leg1
-        self.leg2 = leg2
+        self.tail = 135 * tail
+        self.leg1 = 90 * leg1
+        self.leg2 = 90 * leg2
         self.shape = self.shape()
 
     def shape(self):
@@ -20,7 +20,7 @@ class Dog(Simple_Object):
                     'mouth': Circle(-0.26, 0.27, 0.037, fill = (0.8, 0, 0))
                 })),
                 'body': Rectangle(-0.2, 0.27, 0.35, 0.15, fill = (0, 0, 0.9)),
-                'tail': Transform(translation = (0.17, 0.30), rotation = 135 + self.tail, children = ShapeGroup({
+                'tail': Transform(translation = (0.17, 0.30), rotation = 200 + self.tail, children = ShapeGroup({
                     'tail': Rectangle(-0.025, 0, 0.06, 0.25, fill = (0, 0.0, 0.9))
                 })),
                 'front_leg1': Transform(translation = (-0.15, 0.42), rotation = 30 + self.leg1, children = ShapeGroup({

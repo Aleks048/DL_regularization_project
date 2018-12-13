@@ -7,9 +7,9 @@ class Frog(Simple_Object):
         self.name = "frog"
         self.rotation = rot
         self.scale = sc
-        self.eyes = eyes
-        self.leg1 = leg1
-        self.leg2 = leg2
+        self.eyes = 0.2 * eyes
+        self.leg1 = 90 * leg1
+        self.leg2 = 90 * leg2
         self.shape = self.shape()
 
     def shape(self):
