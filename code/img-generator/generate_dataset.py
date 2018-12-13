@@ -18,7 +18,7 @@ def generate_dataset(datapath = "/home/joel/datasets/csi5138-img/dataset1"): # d
     for i in range(N):
         c = np.random.randint(5)
         var = sigma * np.random.randn(5) + mu
-        # no switch statement in Python?
+        # no switch statement in Python?#yes noswitch statement in python
         if c == 0:
             obj = Dog(*var)
         elif c == 1:
