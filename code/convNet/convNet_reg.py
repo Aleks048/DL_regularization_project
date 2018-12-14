@@ -21,24 +21,25 @@ def CNN(input_shape, output_classes):
 
     # compute DARC1 regularization term
     log_softmax_x = tf.log(x)
-    regularizer = tf.reduce_max(tf.reduce_sum(tf.abs(log_softmax_x), axis=0))
+    reg = tf.reduce_max(tf.reduce_sum(tf.abs(log_softmax_x), axis=0))
 
-    return KM.Model(input, output), regularizer
+    return KM.Model(input, output), reg
 
-def DARC1_sparse_categorical_crossentropy(regularizer, alpha = 0.001):
+def DARC1_sparse_categorical_crossentropy(reg, alpha = 0.001):
     """
     alpha is the hyperparamter of the regularizer
     """
     def loss_fn(y_true, y_pred):
         original_loss = keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
-        return original_loss + alpha * regularizer
+        return original_loss + alpha * reg
 
     return loss_fn
 
-def train():
-    model, regularizer = CNN((512, 512, 3), 3)
+def train(use_regularizer = False):
+    model, reg = CNN((512, 512, 3), 3)
 
-    model.compile(optimizer = 'adam', loss = DARC1_sparse_categorical_crossentropy(regularizer), metrics = ['acc'])
+    loss_fn = DARC1_sparse_categorical_crossentropy(reg) if use_regularizer else keras.losses.sparse_categorical_crossentropy
+    model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
     
     # model.fit
 
