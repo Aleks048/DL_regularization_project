@@ -1,10 +1,13 @@
 import tensorflow as tf
-import tensorflow.keras as keras
-import tensorflow.keras.models as KM
-import tensorflow.keras.layers as KL
+
+#import keras
+import keras.layers as KL
+import keras.models as KM
+import keras
+
 
 def CNN(input_shape, output_classes):
-    input = KL.Input(shape = (*input_shape, ))
+    input = KL.Input(shape =  (*input_shape, ))
 
     x = input
     x = KL.Conv2D(32, 5, activation = 'relu')(x)
@@ -35,13 +38,19 @@ def DARC1_sparse_categorical_crossentropy(reg, alpha = 0.001):
 
     return loss_fn
 
-def train(use_regularizer = False):
-    model, reg = CNN((512, 512, 3), 3)
-
-    loss_fn = DARC1_sparse_categorical_crossentropy(reg) if use_regularizer else keras.losses.sparse_categorical_crossentropy
-    model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
+def train(training_generator, test_generator, epochs, use_multiprocessing=True, use_regularizer = False):
     
-    # model.fit
+	model, reg = CNN((128, 128, 3), 5)
+	loss_fn = DARC1_sparse_categorical_crossentropy(reg) if use_regularizer else keras.losses.sparse_categorical_crossentropy
+	model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
+	model.fit_generator(generator=training_generator,
+                                    validation_data=test_generator,
+                                    epochs=epochs,
+                                    use_multiprocessing=False,
+                                    workers=1,
+                                    max_queue_size=1,
+                                    verbose=1
+                                    )
 
 if __name__ == "__main__":
     train()
