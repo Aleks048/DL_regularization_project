@@ -9,18 +9,18 @@ import getDataGenerators
 from dataFeeder import *
 from myImage import *
 
-
+#generate_dataset.generate_dataset(N = 20000,datapath = "..\DataSet")
 #param param param
 img_x = 128#reshaped the images, to reasonable size!!!!!!!
 img_y = 128
-batch  = 15
+batch  = 30
 numClasses = 5
 numOfChannels = 3
 
 inputShape = (img_x,img_y,numOfChannels)
 
-optimizer = keras.optimizers.Adam()
-loss = keras.losses.categorical_crossentropy
+optimizer = keras.optimizers.SGD(0.001)
+loss = keras.losses.cosine_proximity
 
 epochs = 10
 
@@ -29,7 +29,7 @@ epochs = 10
 
 training_generator,test_generator =getDataGenerators.getDataGenerators((img_x,img_y),batch,numClasses,numOfChannels,False,"../DataSet")
 
-model = convNet.LeNet(numClasses,inputShape)
+model = convNet.alexNetModel(numClasses,inputShape)
 
 model.compile(loss=loss,
                    optimizer = optimizer

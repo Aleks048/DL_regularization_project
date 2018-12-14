@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\code",
+    "\\code\\convNet",
+    "\\code\\DataSet",
+    "\\code\\img-generator",
     "\\code\\main"
   ],
-  "SelectedNode": "\\code\\main",
+  "SelectedNode": "\\code\\main\\main.py",
   "PreviewInSolutionExplorer": false
 }
