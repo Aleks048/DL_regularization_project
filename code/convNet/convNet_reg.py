@@ -52,5 +52,6 @@ def train(training_generator, test_generator, epochs, use_multiprocessing=True, 
                                     verbose=1
                                     )
 
+									
 if __name__ == "__main__":
     train()

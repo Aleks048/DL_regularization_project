@@ -1,6 +1,7 @@
 import importlib.util
 import os
 import sys
+import matplotlib.pyplot as plt
 sys.path.insert(0, '../img-generator')
 sys.path.insert(0, '../convNet')
 import generate_dataset
@@ -35,11 +36,31 @@ model.compile(loss=loss,
                    optimizer = optimizer
                    ,metrics=['accuracy'])
 
-model.fit_generator(generator=training_generator,
+history = model.fit_generator(generator=training_generator,
                                     validation_data=test_generator,
                                     epochs=epochs,
                                     use_multiprocessing=False,
                                     workers=1,
                                     max_queue_size=1,
                                     verbose=1
-                                    )   
+                                    )
+
+# summarize history for accuracy
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('accuracy.png')
+plt.close()
+
+# summarize history for loss
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('loss.png')
+plt.close()
