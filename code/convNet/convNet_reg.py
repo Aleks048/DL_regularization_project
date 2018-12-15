@@ -10,17 +10,17 @@ def SimpleNet(input_shape, output_classes):
 
     x = input
 
-    x = KL.Conv2D(64, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(64, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
 
-    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
-    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
-    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
 
-    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
     x = KL.MaxPooling2D()(x)
 
@@ -34,17 +34,17 @@ def SimpleNet(input_shape, output_classes):
     # x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     # x = KL.BatchNormalization()(x)
 
-    x = KL.Conv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
     x = KL.MaxPooling2D()(x)
 
-    x = KL.Conv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
+    x = KL.SeparableConv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
 
-    x = KL.Conv2D(355, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
+    # x = KL.Conv2D(355, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
 
-    x = KL.Conv2D(432, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.SeparableConv2D(432, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
 
     x = KL.GlobalMaxPooling2D()(x)
