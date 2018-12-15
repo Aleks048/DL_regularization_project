@@ -19,7 +19,7 @@ def getSplitDataGenerators(imgDim,batch,numClasses,numOfChannels,shuffleInBatch,
 	myImagesPerson = []
 	myImagesTruck = []
 
-	for subdir, dirs, files in os.walk("../SplitDataSet/train"):
+	for subdir, dirs, files in os.walk("..\\SplitDataSet\\train"):
 		for file in files:
 			#print os.path.join(subdir, file)
 			filepath = subdir + os.sep + file
@@ -40,11 +40,7 @@ def getSplitDataGenerators(imgDim,batch,numClasses,numOfChannels,shuffleInBatch,
 
 	partition ={"train" : [],"test":[]}
 
-	partition["train"] = [myImagesPlane[i].path for i in range(int(len(myImagesPlane)))]
-		+[myImagesDog[i].path for i in range(int(len(myImagesDog)))]
-		+[myImagesFrog[i].path for i in range(int(len(myImagesFrog)))]
-		+[myImagesPerson[i].path for i in range(int(len(myImagesPerson)))]
-		+[myImagesTruck[i].path for i in range(int(len(myImagesTruck)))]
+	partition["train"] = [myImagesPlane[i].path for i in range(int(len(myImagesPlane)))]+[myImagesDog[i].path for i in range(int(len(myImagesDog)))]+[myImagesFrog[i].path for i in range(int(len(myImagesFrog)))]+[myImagesPerson[i].path for i in range(int(len(myImagesPerson)))]+[myImagesTruck[i].path for i in range(int(len(myImagesTruck)))]
 
 	trainLabels = {myImagesPlane[i].path:myImagesPlane[i].classNum for i in range(int(len(myImagesPlane)))}
 	trDogLabels = {myImagesDog[i].path:myImagesDog[i].classNum for i in range(int(len(myImagesDog)))}
@@ -57,13 +53,13 @@ def getSplitDataGenerators(imgDim,batch,numClasses,numOfChannels,shuffleInBatch,
 	trainLabels = {**trainLabels,**trPersonLabels}
 	trainLabels = {**trainLabels,**trTruckLabels}
 
-  	myImagesPlane = []
+	myImagesPlane = []
 	myImagesDog = []
 	myImagesFrog = []
 	myImagesPerson = []
 	myImagesTruck = []
 
-	for subdir, dirs, files in os.walk("../SplitDataSet/test"):
+	for subdir, dirs, files in os.walk("..\\SplitDataSet\\test"):
 		for file in files:
 			#print os.path.join(subdir, file)
 			filepath = subdir + os.sep + file
@@ -82,17 +78,13 @@ def getSplitDataGenerators(imgDim,batch,numClasses,numOfChannels,shuffleInBatch,
 
  
 
-	partition["test"] = [myImagesPlane[i].path for i in range(int(len(myImagesPlane)))]
-		+[myImagesDog[i].path for i in range(int(len(myImagesDog)))]
-		+[myImagesFrog[i].path for i in range(int(len(myImagesFrog)))]
-		+[myImagesPerson[i].path for i in range(int(len(myImagesPerson)))]
-		+[myImagesTruck[i].path for i in range(int(len(myImagesTruck)))]
-		
-	testLabels = {myImagesPlane[i].path:myImagesPlane[i].classNum for i in range(int(len(myImagesPlane)*0.8),len(myImagesPlane))}
-	testDogLabels = {myImagesDog[i].path:myImagesDog[i].classNum for i in range(int(len(myImagesDog)*0.8),len(myImagesDog))}
-	testFrogLabels = {myImagesFrog[i].path:myImagesFrog[i].classNum for i in range(int(len(myImagesFrog)*0.8),len(myImagesFrog))}
-	testPersonLabels = {myImagesPerson[i].path:myImagesPerson[i].classNum for i in range(int(len(myImagesPerson)*0.8),len(myImagesPerson))}
-	testTruckLabels = {myImagesTruck[i].path:myImagesTruck[i].classNum for i in range(int(len(myImagesTruck)*0.8),len(myImagesTruck))}
+	partition["test"] = [myImagesPlane[i].path for i in range(int(len(myImagesPlane)))]+[myImagesDog[i].path for i in range(int(len(myImagesDog)))]+[myImagesFrog[i].path for i in range(int(len(myImagesFrog)))]+[myImagesPerson[i].path for i in range(int(len(myImagesPerson)))]+[myImagesTruck[i].path for i in range(int(len(myImagesTruck)))]
+	
+	testLabels = {myImagesPlane[i].path:myImagesPlane[i].classNum for i in range(int(len(myImagesPlane)))}
+	testDogLabels = {myImagesDog[i].path:myImagesDog[i].classNum for i in range(int(len(myImagesDog)))}
+	testFrogLabels = {myImagesFrog[i].path:myImagesFrog[i].classNum for i in range(int(len(myImagesFrog)))}
+	testPersonLabels = {myImagesPerson[i].path:myImagesPerson[i].classNum for i in range(int(len(myImagesPerson)))}
+	testTruckLabels = {myImagesTruck[i].path:myImagesTruck[i].classNum for i in range(int(len(myImagesTruck)))}
 	testLabels = {**testLabels,**testDogLabels}
 	testLabels = {**testLabels,**testFrogLabels}
 	testLabels = {**testLabels,**testPersonLabels}

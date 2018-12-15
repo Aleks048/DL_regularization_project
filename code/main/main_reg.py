@@ -8,6 +8,7 @@ import convNet_reg
 import getDataGenerators
 from dataFeeder import *
 from myImage import *
+import matplotlib.pyplot as plt
 
 # import generate_dataset
 # generate_dataset.generate_dataset(N = 20000,datapath = "..\DataSet")
@@ -32,7 +33,7 @@ training_generator,test_generator =getDataGenerators.getDataGenerators((img_x,im
 # for x,y in training_generator:
 #     print(y)
 #     break
-history = convNet_reg.train(training_generator, test_generator, epochs, use_regularizer = False)
+history = convNet_reg.train(training_generator, test_generator, epochs, use_regularizer = True)
 
 # summarize history for accuracy
 plt.plot(history.history['acc'])
