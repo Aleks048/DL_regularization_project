@@ -77,6 +77,7 @@ def CNN(input_shape, output_classes):
 
     # compute DARC1 regularization term
     log_softmax_x = tf.log(x)
+    log_softmax_x = tf.where(tf.is_nan(log_softmax_x), tf.log(tf.keras.backend.epsilon()), log_softmax_x)
     reg = tf.reduce_max(tf.reduce_sum(tf.abs(log_softmax_x), axis=0))
 
     return KM.Model(input, output), reg
