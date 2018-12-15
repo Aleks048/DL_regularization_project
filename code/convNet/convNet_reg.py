@@ -5,6 +5,55 @@ import keras.layers as KL
 import keras.models as KM
 import keras
 
+def SimpleNet(input_shape, output_classes):
+    input = KL.Input(shape = input_shape)
+
+    x = input
+
+    x = KL.Conv2D(64, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.Conv2D(128, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.MaxPooling2D()(x)
+
+    x = KL.Conv2D(192, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.Conv2D(192, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.Conv2D(192, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.Conv2D(192, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.Conv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+    x = KL.MaxPooling2D()(x)
+
+    x = KL.Conv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.Conv2D(355, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.Conv2D(432, 3, activation = 'relu')(x)
+    x = KL.BatchNormalization()(x)
+
+    x = KL.GlobalMaxPooling2D()(x)
+
+    x = KL.Flatten()(x)
+    x = KL.Dense(output_classes, activation='softmax', kernel_initializer = 'glorot_normal')(x)
+
+    output = x
+
+    return KM.Model(input, output)
 
 def CNN(input_shape, output_classes):
     input = KL.Input(shape =  (*input_shape, ))
@@ -42,7 +91,7 @@ def DARC1_categorical_crossentropy(reg, use_reg = False, alpha = 0.001):
 
 def train(training_generator, test_generator, epochs, use_multiprocessing=True, use_regularizer = False):
     
-	model, reg = CNN((128, 128, 3), 5)
+	model, reg = SimpleNet((128, 128, 3), 5)
 	loss_fn = DARC1_categorical_crossentropy(reg, use_regularizer)
 	model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
 	history = model.fit_generator(generator=training_generator,
