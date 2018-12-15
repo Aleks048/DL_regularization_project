@@ -28,20 +28,22 @@ def CNN(input_shape, output_classes):
 
     return KM.Model(input, output), reg
 
-def DARC1_sparse_categorical_crossentropy(reg, alpha = 0.001):
+def DARC1_categorical_crossentropy(reg, use_reg = False, alpha = 0.001):
     """
     alpha is the hyperparamter of the regularizer
     """
-    def loss_fn(y_true, y_pred):
-        original_loss = keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
-        return original_loss + alpha * reg
-
-    return loss_fn
+    if use_reg:
+        def loss_fn(y_true, y_pred):
+            original_loss = keras.losses.categorical_crossentropy(y_true, y_pred)
+            return original_loss + alpha * reg
+        return loss_fn
+    else:
+        return keras.losses.categorical_crossentropy
 
 def train(training_generator, test_generator, epochs, use_multiprocessing=True, use_regularizer = False):
     
 	model, reg = CNN((128, 128, 3), 5)
-	loss_fn = DARC1_sparse_categorical_crossentropy(reg) if use_regularizer else keras.losses.sparse_categorical_crossentropy
+	loss_fn = DARC1_categorical_crossentropy(reg, use_regularizer)
 	model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
 	model.fit_generator(generator=training_generator,
                                     validation_data=test_generator,
@@ -53,5 +55,5 @@ def train(training_generator, test_generator, epochs, use_multiprocessing=True, 
                                     )
 
 									
-if __name__ == "__main__":
-    train()
+# if __name__ == "__main__":
+#     train()
