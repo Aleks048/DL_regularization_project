@@ -3,13 +3,14 @@ import os
 import sys
 sys.path.insert(0, '../img-generator')
 sys.path.insert(0, '../convNet')
-#import generate_dataset
+
 import convNet_reg
 import getDataGenerators
 from dataFeeder import *
 from myImage import *
 
-#generate_dataset.generate_dataset(N = 20000,datapath = "..\DataSet")
+# import generate_dataset
+# generate_dataset.generate_dataset(N = 20000,datapath = "..\DataSet")
 #param param param
 img_x = 128 #reshaped the images, to reasonable size!!!!!!!
 img_y = 128
@@ -28,4 +29,7 @@ epochs = 10
 
 training_generator,test_generator =getDataGenerators.getDataGenerators((img_x,img_y),batch,numClasses,numOfChannels,False,"../DataSet")
 
+# for x,y in training_generator:
+#     print(y)
+#     break
 convNet_reg.train(training_generator, test_generator, epochs, use_regularizer = False)
