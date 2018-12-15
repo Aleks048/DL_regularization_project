@@ -6,7 +6,7 @@ import keras.models as KM
 import keras
 
 def SimpleNet(input_shape, output_classes):
-    input = KL.Input(shape = input_shape)
+    input = KL.Input(shape = (*input_shape, ))
 
     x = input
 
@@ -24,6 +24,7 @@ def SimpleNet(input_shape, output_classes):
     x = KL.BatchNormalization()(x)
     x = KL.MaxPooling2D()(x)
 
+    # Comment out these 4 if there is not enough memory
     x = KL.Conv2D(192, 3, activation = 'relu')(x)
     x = KL.BatchNormalization()(x)
     x = KL.Conv2D(192, 3, activation = 'relu')(x)
@@ -48,7 +49,6 @@ def SimpleNet(input_shape, output_classes):
 
     x = KL.GlobalMaxPooling2D()(x)
 
-    x = KL.Flatten()(x)
     x = KL.Dense(output_classes, activation='softmax', kernel_initializer = 'glorot_normal')(x)
 
     output = x
