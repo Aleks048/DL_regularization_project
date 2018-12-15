@@ -54,8 +54,8 @@ def SimpleNet(input_shape, output_classes):
     output = x
 
     # compute DARC1 regularization term
-    log_softmax_x = tf.log(x)
-    reg = tf.reduce_max(tf.reduce_sum(tf.abs(log_softmax_x), axis=0))
+    # log_softmax_x = tf.log(x)
+    reg = tf.reduce_max(tf.reduce_sum(tf.abs(x), axis=0))
 
     return KM.Model(input, output), reg
 
