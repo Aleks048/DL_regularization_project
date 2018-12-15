@@ -25,14 +25,14 @@ def SimpleNet(input_shape, output_classes):
     x = KL.MaxPooling2D()(x)
 
     # Comment out these 4 if there is not enough memory
-    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
-    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
-    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
-    x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
-    x = KL.BatchNormalization()(x)
+    # x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
+    # x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
+    # x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
+    # x = KL.Conv2D(192, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
+    # x = KL.BatchNormalization()(x)
 
     x = KL.Conv2D(288, 3, activation = 'relu', kernel_initializer = 'glorot_normal')(x)
     x = KL.BatchNormalization()(x)
