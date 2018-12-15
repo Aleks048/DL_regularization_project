@@ -45,7 +45,7 @@ def train(training_generator, test_generator, epochs, use_multiprocessing=True, 
 	model, reg = CNN((128, 128, 3), 5)
 	loss_fn = DARC1_categorical_crossentropy(reg, use_regularizer)
 	model.compile(optimizer = 'adam', loss = loss_fn, metrics = ['acc'])
-	model.fit_generator(generator=training_generator,
+	history = model.fit_generator(generator=training_generator,
                                     validation_data=test_generator,
                                     epochs=epochs,
                                     use_multiprocessing=False,
@@ -53,6 +53,7 @@ def train(training_generator, test_generator, epochs, use_multiprocessing=True, 
                                     max_queue_size=1,
                                     verbose=1
                                     )
+	return history
 
 									
 # if __name__ == "__main__":
